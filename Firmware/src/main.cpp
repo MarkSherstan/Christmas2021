@@ -3,49 +3,51 @@
 #include <avr/interrupt.h>
 
 #define switchPin   3
-#define statusLED   2
+#define statusLED   4
+
+// Bootloader example
+// https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829
 
 // Functions
-void sleep();
+//void sleep();
 
+// #define A 8
+// #define B 9
+// #define C 10
+// #define D 11
 
-#define A 8
-#define B 9
-#define C 10
-#define D 11
+// #define PIN_CONFIG 0
+// #define PIN_STATE 1
 
-#define PIN_CONFIG 0
-#define PIN_STATE 1
+// #define LED_Num 12
 
-#define LED_Num 12
+// int matrix[LED_Num][2][4] = {
+//   //        PIN_CONFIG              PIN_STATE
+//   //    A       B       C         A     B    C 
+//   { { OUTPUT, OUTPUT, INPUT }, { HIGH, LOW, LOW } }, 
+//   { { OUTPUT, OUTPUT, INPUT }, { LOW, HIGH, LOW } }, 
+//   { { INPUT, OUTPUT, OUTPUT }, { LOW, HIGH, LOW } },
+//   { { INPUT, OUTPUT, OUTPUT }, { LOW, LOW, HIGH } }, 
+//   { { OUTPUT, INPUT, OUTPUT }, { HIGH, LOW, LOW } },
+//   { { OUTPUT, INPUT, OUTPUT }, { LOW, LOW, HIGH } }, 
+//   { { OUTPUT, INPUT, INPUT },  { HIGH, LOW, LOW } }, 
+//   { { OUTPUT, INPUT, INPUT },  { LOW, LOW, LOW }  }, 
+//   { { INPUT, OUTPUT, INPUT },  { LOW, HIGH, LOW } }, 
+//   { { INPUT, OUTPUT, INPUT },  { LOW, LOW, LOW }  }, 
+//   { { INPUT, INPUT, OUTPUT },  { LOW, LOW, HIGH } }, 
+//   { { INPUT, INPUT, OUTPUT },  { LOW, LOW, LOW }  }  
+// };
 
-int matrix[LED_Num][2][4] = {
-  //           PIN_CONFIG                  PIN_STATE
-  //    A       B       C      D         A     B    C    D
-  { { OUTPUT, OUTPUT, INPUT, INPUT }, { HIGH, LOW, LOW, LOW } }, 
-  { { OUTPUT, OUTPUT, INPUT, INPUT }, { LOW, HIGH, LOW, LOW } }, 
-  { { INPUT, OUTPUT, OUTPUT, INPUT }, { LOW, HIGH, LOW, LOW } },
-  { { INPUT, OUTPUT, OUTPUT, INPUT }, { LOW, LOW, HIGH, LOW } }, 
-  { { OUTPUT, INPUT, OUTPUT, INPUT }, { HIGH, LOW, LOW, LOW } },
-  { { OUTPUT, INPUT, OUTPUT, INPUT }, { LOW, LOW, HIGH, LOW } }, 
-  { { OUTPUT, INPUT, INPUT, OUTPUT }, { HIGH, LOW, LOW, LOW } }, 
-  { { OUTPUT, INPUT, INPUT, OUTPUT }, { LOW, LOW, LOW, HIGH } }, 
-  { { INPUT, OUTPUT, INPUT, OUTPUT }, { LOW, HIGH, LOW, LOW } }, 
-  { { INPUT, OUTPUT, INPUT, OUTPUT }, { LOW, LOW, LOW, HIGH } }, 
-  { { INPUT, INPUT, OUTPUT, OUTPUT }, { LOW, LOW, HIGH, LOW } }, 
-  { { INPUT, INPUT, OUTPUT, OUTPUT }, { LOW, LOW, LOW, HIGH } }  
-};
-
-void lightOn( int led ) {
-  pinMode( A, matrix[led][PIN_CONFIG][0] );
-  pinMode( B, matrix[led][PIN_CONFIG][1] );
-  pinMode( C, matrix[led][PIN_CONFIG][2] );
-  pinMode( D, matrix[led][PIN_CONFIG][3] );
-  digitalWrite( A, matrix[led][PIN_STATE][0] );
-  digitalWrite( B, matrix[led][PIN_STATE][1] );
-  digitalWrite( C, matrix[led][PIN_STATE][2] );
-  digitalWrite( D, matrix[led][PIN_STATE][3] );
-}
+// void lightOn( int led ) {
+//   pinMode( A, matrix[led][PIN_CONFIG][0] );
+//   pinMode( B, matrix[led][PIN_CONFIG][1] );
+//   pinMode( C, matrix[led][PIN_CONFIG][2] );
+//   pinMode( D, matrix[led][PIN_CONFIG][3] );
+//   digitalWrite( A, matrix[led][PIN_STATE][0] );
+//   digitalWrite( B, matrix[led][PIN_STATE][1] );
+//   digitalWrite( C, matrix[led][PIN_STATE][2] );
+//   digitalWrite( D, matrix[led][PIN_STATE][3] );
+// }
 
 void setup()
 {
@@ -74,6 +76,10 @@ void loop()
     digitalWrite(statusLED, HIGH);
     delay(1000);
     digitalWrite(statusLED, LOW);
+    delay(1000);
+    digitalWrite(statusLED, HIGH);
+    delay(1000);
+    digitalWrite(statusLED, LOW); 
 }
 
 void sleep()
@@ -96,5 +102,3 @@ void sleep()
 }
 
 ISR(PCINT0_vect){}
-
-
