@@ -3,3 +3,4 @@
 # PCB
 *.sch-bak
 *-cache*
+*.kicad_pcb-bak
