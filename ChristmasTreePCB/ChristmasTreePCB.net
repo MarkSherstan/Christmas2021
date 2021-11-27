@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /Users/MarkSherstan/Documents/GitHub/Christmas2021/ChristmasTreePCB/ChristmasTreePCB.sch)
-    (date "Saturday, 27 November 2021 at 09:56:05")
+    (date "Saturday, 27 November 2021 at 10:34:15")
     (tool "Eeschema (5.1.10-1-10_14)")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -35,7 +35,7 @@
       (tstamp 619C84F5))
     (comp (ref BT1)
       (value "2x AAA")
-      (footprint Battery:BatteryHolder_Keystone_2468_2xAAA)
+      (footprint ChristmasTreeCustomFootprints:2468_Custom)
       (datasheet ~)
       (fields
         (field (name "Digi-Key #") 36-2468-ND)

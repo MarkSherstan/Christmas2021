@@ -59,7 +59,7 @@ U 1 1 619C8DA9
 P 2550 5700
 F 0 "BT1" H 2668 5796 50  0000 L CNN
 F 1 "2x AAA" H 2668 5705 50  0000 L CNN
-F 2 "Battery:BatteryHolder_Keystone_2468_2xAAA" V 2550 5760 50  0001 C CNN
+F 2 "ChristmasTreeCustomFootprints:2468_Custom" V 2550 5760 50  0001 C CNN
 F 3 "~" V 2550 5760 50  0001 C CNN
 F 4 "Keystone Electronics" H 2550 5700 50  0001 C CNN "Manufacturer"
 F 5 "2468" H 2550 5700 50  0001 C CNN "Manufacturer #"
