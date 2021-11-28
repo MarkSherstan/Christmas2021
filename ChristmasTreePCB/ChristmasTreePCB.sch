@@ -488,12 +488,12 @@ $EndComp
 $Comp
 L Mechanical:MountingHole H1
 U 1 1 61A0DA54
-P 5350 7300
-F 0 "H1" H 5450 7346 50  0000 L CNN
-F 1 "M2" H 5450 7255 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.1mm" H 5350 7300 50  0001 C CNN
-F 3 "~" H 5350 7300 50  0001 C CNN
-	1    5350 7300
+P 5350 7350
+F 0 "H1" H 5450 7396 50  0000 L CNN
+F 1 "M2" H 5450 7305 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.1mm" H 5350 7350 50  0001 C CNN
+F 3 "~" H 5350 7350 50  0001 C CNN
+	1    5350 7350
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
