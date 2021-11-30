@@ -1,66 +1,27 @@
-// Bootloader example
-// https://create.arduino.cc/projecthub/arjun/programming-attiny85-with-arduino-uno-afb829
-
-// #define LED_1 0
-// #define LED_2 1
-// #define LED_3 2
-
-// void setup()
-// {
-//    pinMode(LED_1, INPUT);
-//    pinMode(LED_2, INPUT);
-//    pinMode(LED_3, INPUT);
-
-//    pinMode(4, OUTPUT);
-// }
-
-// void loop()
-// {
-//    digitalWrite(4, HIGH);
-
-//    set_pins(LED_1, LED_2);
-//    delay(50);
-//    set_pins(LED_2, LED_1);
-//    delay(50);
-//    set_pins(LED_3, LED_1);
-//    delay(50);
-//    set_pins(LED_1, LED_3);
-//    delay(50);
-//    set_pins(LED_2, LED_3);
-//    delay(50);
-//    set_pins(LED_3, LED_2);
-//    delay(50);
-// }
-
-// void set_pins(int high_pin, int low_pin)
-// {
-//    reset_pins();
-//    pinMode(high_pin, OUTPUT);
-//    pinMode(low_pin, OUTPUT);
-//    digitalWrite(high_pin, HIGH);
-//    digitalWrite(low_pin,LOW);
-// }
-
-// void reset_pins()
-// {
-//    pinMode(LED_1, INPUT);
-//    pinMode(LED_2, INPUT);
-//    pinMode(LED_3, INPUT);
-//    digitalWrite(LED_1, LOW);
-//    digitalWrite(LED_2, LOW);
-//    digitalWrite(LED_3, LOW);
-// }
-
 #include <Arduino.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
 
 // Pinout
+#define CHARLIEPLEX_A 0
+#define CHARLIEPLEX_B 1
+#define CHARLIEPLEX_C 2
 #define switchPin 3
-#define statusLED 4
+#define starLED 4
 
 // Functions
 void sleep();
+void lightSelect(uint8_t LED);
+
+// Variables
+uint8_t stateMatrix[6][2][3] = {
+    // Pin Mode {A, B, C}     Pin State {A, B, C}
+    {{OUTPUT, OUTPUT, INPUT}, {HIGH, LOW, LOW}},
+    {{OUTPUT, OUTPUT, INPUT}, {LOW, HIGH, LOW}},
+    {{INPUT, OUTPUT, OUTPUT}, {LOW, HIGH, LOW}},
+    {{INPUT, OUTPUT, OUTPUT}, {LOW, LOW, HIGH}},
+    {{OUTPUT, INPUT, OUTPUT}, {HIGH, LOW, LOW}},
+    {{OUTPUT, INPUT, OUTPUT}, {LOW, LOW, HIGH}}};
 
 // Initialize
 void setup()
@@ -68,7 +29,7 @@ void setup()
     // Set up digital pins
     pinMode(switchPin, INPUT);
     digitalWrite(switchPin, HIGH);
-    pinMode(statusLED, OUTPUT);
+    pinMode(starLED, OUTPUT);
 
     // Flash quick sequence so we know setup has started
 }
@@ -80,16 +41,16 @@ void loop()
     sleep();
 
     // Run this once before going back to sleep
-    digitalWrite(statusLED, HIGH);
+    digitalWrite(starLED, HIGH);
     delay(1000);
-    digitalWrite(statusLED, LOW);
+    digitalWrite(starLED, LOW);
     delay(1000);
-    digitalWrite(statusLED, HIGH);
+    digitalWrite(starLED, HIGH);
     delay(1000);
-    digitalWrite(statusLED, LOW);
+    digitalWrite(starLED, LOW);
 }
 
-// Put processor into lowest power state possible and set an external 
+// Put processor into lowest power state possible and set an external
 // interrupt to wake the processor when it is time to do something.
 void sleep()
 {
@@ -115,42 +76,15 @@ void sleep()
 }
 
 // Interrupt service routine
-ISR(PCINT0_vect){}
+ISR(PCINT0_vect) {}
 
-// #define A 8
-// #define B 9
-// #define C 10
-// #define D 11
-
-// #define PIN_CONFIG 0
-// #define PIN_STATE 1
-
-// #define LED_Num 12
-
-// int matrix[LED_Num][2][4] = {
-//   //        PIN_CONFIG              PIN_STATE
-//   //    A       B       C         A     B    C
-//   { { OUTPUT, OUTPUT, INPUT }, { HIGH, LOW, LOW } },
-//   { { OUTPUT, OUTPUT, INPUT }, { LOW, HIGH, LOW } },
-//   { { INPUT, OUTPUT, OUTPUT }, { LOW, HIGH, LOW } },
-//   { { INPUT, OUTPUT, OUTPUT }, { LOW, LOW, HIGH } },
-//   { { OUTPUT, INPUT, OUTPUT }, { HIGH, LOW, LOW } },
-//   { { OUTPUT, INPUT, OUTPUT }, { LOW, LOW, HIGH } },
-//   { { OUTPUT, INPUT, INPUT },  { HIGH, LOW, LOW } },
-//   { { OUTPUT, INPUT, INPUT },  { LOW, LOW, LOW }  },
-//   { { INPUT, OUTPUT, INPUT },  { LOW, HIGH, LOW } },
-//   { { INPUT, OUTPUT, INPUT },  { LOW, LOW, LOW }  },
-//   { { INPUT, INPUT, OUTPUT },  { LOW, LOW, HIGH } },
-//   { { INPUT, INPUT, OUTPUT },  { LOW, LOW, LOW }  }
-// };
-
-// void lightOn( int led ) {
-//   pinMode( A, matrix[led][PIN_CONFIG][0] );
-//   pinMode( B, matrix[led][PIN_CONFIG][1] );
-//   pinMode( C, matrix[led][PIN_CONFIG][2] );
-//   pinMode( D, matrix[led][PIN_CONFIG][3] );
-//   digitalWrite( A, matrix[led][PIN_STATE][0] );
-//   digitalWrite( B, matrix[led][PIN_STATE][1] );
-//   digitalWrite( C, matrix[led][PIN_STATE][2] );
-//   digitalWrite( D, matrix[led][PIN_STATE][3] );
-// }
+// Select LED to turn on
+void lightSelect(uint8_t LED)
+{
+    pinMode(CHARLIEPLEX_A, stateMatrix[LED][0][0]);
+    pinMode(CHARLIEPLEX_B, stateMatrix[LED][0][1]);
+    pinMode(CHARLIEPLEX_C, stateMatrix[LED][0][2]);
+    digitalWrite(CHARLIEPLEX_A, stateMatrix[LED][1][0]);
+    digitalWrite(CHARLIEPLEX_B, stateMatrix[LED][1][1]);
+    digitalWrite(CHARLIEPLEX_C, stateMatrix[LED][1][2]);
+}
