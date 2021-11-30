@@ -11,7 +11,9 @@
 
 // Functions
 void sleep();
+void lightReset();
 void lightSelect(uint8_t LED);
+void sequenceAlpha();
 
 // Variables
 uint8_t stateMatrix[6][2][3] = {
@@ -30,8 +32,10 @@ void setup()
     pinMode(switchPin, INPUT);
     digitalWrite(switchPin, HIGH);
     pinMode(starLED, OUTPUT);
+    lightReset();
 
     // Flash quick sequence so we know setup has started
+    sequenceAlpha();
 }
 
 // Run forever
@@ -48,6 +52,8 @@ void loop()
     digitalWrite(starLED, HIGH);
     delay(1000);
     digitalWrite(starLED, LOW);
+
+    sequenceAlpha();
 }
 
 // Put processor into lowest power state possible and set an external
@@ -87,4 +93,30 @@ void lightSelect(uint8_t LED)
     digitalWrite(CHARLIEPLEX_A, stateMatrix[LED][1][0]);
     digitalWrite(CHARLIEPLEX_B, stateMatrix[LED][1][1]);
     digitalWrite(CHARLIEPLEX_C, stateMatrix[LED][1][2]);
+}
+
+// Inititalize all LEDS to off
+void lightReset()
+{
+    pinMode(CHARLIEPLEX_A, INPUT);
+    pinMode(CHARLIEPLEX_B, INPUT);
+    pinMode(CHARLIEPLEX_C, INPUT);
+
+    digitalWrite(CHARLIEPLEX_A, LOW);
+    digitalWrite(CHARLIEPLEX_B, LOW);
+    digitalWrite(CHARLIEPLEX_C, LOW);
+}
+
+// Pattern alpha - just loop through the light
+void sequenceAlpha(){
+    for (uint8_t i = 0; i < 50; i++)
+    {
+        for (uint8_t j = 0; j < 6; j++)
+        {
+            lightSelect(j);
+            delay(10);
+        }
+    }
+
+    lightReset();
 }
