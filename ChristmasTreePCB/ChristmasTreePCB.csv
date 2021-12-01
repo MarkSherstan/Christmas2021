@@ -1,0 +1,13 @@
+Qty,Reference(s),Value,LibPart,Footprint,Digi-Key #,Manufacturer,Manufacturer #
+1,BT1,2x AAA,Device:Battery_Cell,ChristmasTreeCustomFootprints:2468_Custom,36-2468-ND,Keystone Electronics,2468
+1,C1,0.1 uF 10%,Device:C,Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder,,,
+1,D1,Yellow 2.1V 20mA,Device:LED,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,
+3,"D2, D5, D6",Green 2V 20mA,Device:LED,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,
+3,"D3, D4, D7",Red 2V 20mA,Device:LED,LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder,,,
+1,H1,M2,Mechanical:MountingHole,MountingHole:MountingHole_2.1mm,,,
+1,J1,ICSP,Connector_Generic:Conn_02x03_Odd_Even,Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical,,,
+2,"R1, R6",10 kohm 5%,Device:R,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,,,
+1,R2,62 ohm 5%,Device:R,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,,,
+3,"R3, R4, R5",33 ohm 5%,Device:R,Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder,,,
+1,SW1,SPST-NO,Switch:SW_Push,Button_Switch_SMD:SW_SPST_PTS645,CKN10880CT-ND,C&K,PTS645SL43SMTR92 LFS
+1,U1,ATtiny85-20SHR,MCU_Microchip_ATtiny:ATtiny85V-10SU,Package_SO:SOIC-8_5.275x5.275mm_P1.27mm,ATTINY85-20SHRCT-ND,Microchip Technology,ATTINY85-20SHR
