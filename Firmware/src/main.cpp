@@ -103,20 +103,20 @@ void lightReset()
 void sequenceAlpha()
 {
     // Initial conditions
-    uint8_t starBrightness = 0;
+    uint8_t starBrightness = 255;
 
     // Loop
-    for (uint8_t i = 0; i < 255; i++)
+    for (uint8_t i = 0; i < 51; i++)
     {
         // Loop through each LED
         for (uint8_t j = 0; j < 6; j++)
         {
             lightSelect(j);
-            delay(2);
+            delay(17);
         }
 
         // Dim the star light
-        starBrightness -= 1;
+        starBrightness -= 5;
         analogWrite(starLight, starBrightness);
     }
 
