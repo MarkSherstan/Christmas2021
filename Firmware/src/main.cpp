@@ -3,11 +3,11 @@
 #include <avr/interrupt.h>
 
 // Pinout
-#define CHARLIEPLEX_A 0
-#define CHARLIEPLEX_B 1
-#define CHARLIEPLEX_C 2
-#define switchPin 3
-#define starLED 4
+#define CHARLIEPLEX_A   0
+#define CHARLIEPLEX_B   1
+#define CHARLIEPLEX_C   2
+#define switchPin       3
+#define starLight       4
 
 // Functions
 void sleep();
@@ -31,7 +31,6 @@ void setup()
     // Set up digital pins
     pinMode(switchPin, INPUT);
     digitalWrite(switchPin, HIGH);
-    pinMode(starLED, OUTPUT);
     lightReset();
 
     // Flash quick sequence so we know setup has started
@@ -44,15 +43,7 @@ void loop()
     // Put processor into a deep sleep waiting for a button press
     sleep();
 
-    // Run this once before going back to sleep
-    digitalWrite(starLED, HIGH);
-    delay(1000);
-    digitalWrite(starLED, LOW);
-    delay(1000);
-    digitalWrite(starLED, HIGH);
-    delay(1000);
-    digitalWrite(starLED, LOW);
-
+    // Run a sequence
     sequenceAlpha();
 }
 
@@ -101,21 +92,32 @@ void lightReset()
     pinMode(CHARLIEPLEX_A, INPUT);
     pinMode(CHARLIEPLEX_B, INPUT);
     pinMode(CHARLIEPLEX_C, INPUT);
+    pinMode(starLight, OUTPUT);
 
     digitalWrite(CHARLIEPLEX_A, LOW);
     digitalWrite(CHARLIEPLEX_B, LOW);
     digitalWrite(CHARLIEPLEX_C, LOW);
 }
 
-// Pattern alpha - just loop through the light
-void sequenceAlpha(){
-    for (uint8_t i = 0; i < 50; i++)
+// Pattern alpha - just loop through the lights
+void sequenceAlpha()
+{
+    // Initial conditions
+    uint8_t starBrightness = 0;
+
+    // Loop
+    for (uint8_t i = 0; i < 255; i++)
     {
+        // Loop through each LED
         for (uint8_t j = 0; j < 6; j++)
         {
             lightSelect(j);
-            delay(10);
+            delay(2);
         }
+
+        // Dim the star light
+        starBrightness -= 1;
+        analogWrite(starLight, starBrightness);
     }
 
     lightReset();
