@@ -1,11 +1,9 @@
 #include <Arduino.h>
 #include <avr/sleep.h>
 #include <avr/interrupt.h>
+#include "Lights.h"
 
 // Pinout
-#define CHARLIEPLEX_A   0
-#define CHARLIEPLEX_B   1
-#define CHARLIEPLEX_C   2
 #define switchPin       3
 #define starLight       4
 
