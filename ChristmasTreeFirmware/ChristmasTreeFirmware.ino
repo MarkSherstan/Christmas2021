@@ -3,14 +3,15 @@
 #include <avr/interrupt.h>
 #include "Lights.h"
 
-// Pinout
-#define SWITCH_PIN 3
-
 // Functions
 void sleep();
 
 // Class
 Lights lights;
+
+// Variables
+const uint8_t SWITCH_PIN = 3;
+uint8_t state = 0;
 
 // Initialize
 void setup()
@@ -29,8 +30,23 @@ void loop()
     // Put processor into a deep sleep waiting for a button press
     sleep();
 
-    // Run a sequence
-    lights.patternA();
+    // Cycle through the different patterns
+    switch (state)
+    {
+    case 0:
+        lights.patternA();
+        state += 1;
+        break;
+    
+    case 1:
+        lights.patternB();
+        state += 1; // possible race condition... Set to zero?
+        break;
+    
+    default:
+        state = 0;
+        break;
+    }
 }
 
 // Sleep processor and only wake on button press
