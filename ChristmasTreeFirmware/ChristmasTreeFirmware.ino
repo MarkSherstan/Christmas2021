@@ -4,7 +4,7 @@
 #include "Lights.h"
 
 // Pinout
-#define switchPin   3
+#define SWITCH_PIN 3
 
 // Functions
 void sleep();
@@ -15,13 +15,12 @@ Lights lights;
 // Initialize
 void setup()
 {
-    // Set up digital pins
-    pinMode(switchPin, INPUT);
-    digitalWrite(switchPin, HIGH);
-    lights.lightReset();
+    // Set up button
+    pinMode(SWITCH_PIN, INPUT);
+    digitalWrite(SWITCH_PIN, HIGH);
 
-    // Flash quick sequence so we know setup has started
-    lights.sequenceAlpha();
+    // Initialize the LEDs
+    lights.reset();
 }
 
 // Run forever
@@ -31,11 +30,10 @@ void loop()
     sleep();
 
     // Run a sequence
-    lights.sequenceAlpha();
+    lights.patternA();
 }
 
-// Put processor into lowest power state possible and set an external
-// interrupt to wake the processor when it is time to do something.
+// Sleep processor and only wake on button press
 void sleep()
 {
     // Enable interrupts, turn off ADC, prepare for sleep mode

@@ -1,13 +1,14 @@
 #ifndef Lights_H
 #define Lights_H
 
+// Libs
 #include <Arduino.h>
 
-#define starLight       4
-
+// Constants 
 #define CHARLIEPLEX_A   0
 #define CHARLIEPLEX_B   1
 #define CHARLIEPLEX_C   2
+#define starLight       4
 
 // Class
 class Lights
@@ -23,14 +24,16 @@ class Lights
             {{OUTPUT, INPUT, OUTPUT}, {HIGH, LOW, LOW}},
             {{OUTPUT, INPUT, OUTPUT}, {LOW, LOW, HIGH}}};
 
+        // Functions
+        void lightSelect(uint8_t LED);
+
     public:
         // Config
         Lights() = default;
 
         // Functions
-        void sequenceAlpha();
-        void lightReset();
-        void lightSelect(uint8_t LED);
+        void patternA();
+        void reset();
 };
 
 #endif // Lights_H

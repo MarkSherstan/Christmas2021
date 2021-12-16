@@ -1,18 +1,7 @@
 #include "Lights.h"
 
-// Select LED to turn on
-void Lights::lightSelect(uint8_t LED)
-{
-    pinMode(CHARLIEPLEX_A, stateMatrix[LED][0][0]);
-    pinMode(CHARLIEPLEX_B, stateMatrix[LED][0][1]);
-    pinMode(CHARLIEPLEX_C, stateMatrix[LED][0][2]);
-    digitalWrite(CHARLIEPLEX_A, stateMatrix[LED][1][0]);
-    digitalWrite(CHARLIEPLEX_B, stateMatrix[LED][1][1]);
-    digitalWrite(CHARLIEPLEX_C, stateMatrix[LED][1][2]);
-}
-
-// Inititalize all LEDS to off
-void Lights::lightReset()
+// Reset all LEDs
+void Lights::reset()
 {
     pinMode(CHARLIEPLEX_A, INPUT);
     pinMode(CHARLIEPLEX_B, INPUT);
@@ -24,8 +13,20 @@ void Lights::lightReset()
     digitalWrite(CHARLIEPLEX_C, LOW);
 }
 
-// Pattern alpha - just loop through the lights
-void Lights::sequenceAlpha()
+// Select LED to turn on
+void Lights::lightSelect(uint8_t LED)
+{
+    pinMode(CHARLIEPLEX_A, stateMatrix[LED][0][0]);
+    pinMode(CHARLIEPLEX_B, stateMatrix[LED][0][1]);
+    pinMode(CHARLIEPLEX_C, stateMatrix[LED][0][2]);
+
+    digitalWrite(CHARLIEPLEX_A, stateMatrix[LED][1][0]);
+    digitalWrite(CHARLIEPLEX_B, stateMatrix[LED][1][1]);
+    digitalWrite(CHARLIEPLEX_C, stateMatrix[LED][1][2]);
+}
+
+// Pattern A: Flash all the lights
+void Lights::patternA()
 {
     // Initial conditions
     uint8_t starBrightness = 255;
@@ -45,5 +46,6 @@ void Lights::sequenceAlpha()
         analogWrite(starLight, starBrightness);
     }
 
+    // Reset lights
     lightReset();
 }
