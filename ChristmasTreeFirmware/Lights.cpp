@@ -6,14 +6,23 @@ void Lights::reset()
     pinMode(CHARLIEPLEX_A, INPUT);
     pinMode(CHARLIEPLEX_B, INPUT);
     pinMode(CHARLIEPLEX_C, INPUT);
-    pinMode(starLight, OUTPUT);
+    pinMode(STAR_LIGHT, OUTPUT);
 
     digitalWrite(CHARLIEPLEX_A, LOW);
     digitalWrite(CHARLIEPLEX_B, LOW);
     digitalWrite(CHARLIEPLEX_C, LOW);
+    digitalWrite(STAR_LIGHT, LOW);
 }
 
-// Select LED to turn on
+// Select LED to turn on:
+    /////////////////
+    //      *      //
+    //    3   0    //
+    //   2     5   //
+    //  4       1  //
+    // ----------- //
+    //      ||     //
+    /////////////////
 void Lights::lightSelect(uint8_t LED)
 {
     pinMode(CHARLIEPLEX_A, stateMatrix[LED][0][0]);
@@ -43,9 +52,47 @@ void Lights::patternA()
 
         // Dim the star light
         starBrightness -= 5;
-        analogWrite(starLight, starBrightness);
+        analogWrite(STAR_LIGHT, starBrightness);
     }
 
     // Reset lights
-    lightReset();
+    reset();
+}
+
+// Pattern B: Flash up and Down
+void Lights::patternB()
+{
+    for (uint8_t i = 0; i < 10; i++)
+    {
+        for (uint8_t j = 0; j < 4; j++)
+        {
+        lightSelect(1);
+        delay(10);
+        lightSelect(4);
+        delay(10);
+        }
+
+        for (uint8_t j = 0; j < 4; j++)
+        {
+        lightSelect(2);
+        delay(10);
+        lightSelect(5);
+        delay(10);
+        }
+
+        for (uint8_t j = 0; j < 4; j++)
+        {
+        lightSelect(3);
+        delay(10);
+        lightSelect(0);
+        delay(10);
+        }
+
+        digitalWrite(STAR_LIGHT, HIGH);
+        delay(100);
+        digitalWrite(STAR_LIGHT, LOW);
+    }
+    
+    // Reset lights
+    reset();
 }

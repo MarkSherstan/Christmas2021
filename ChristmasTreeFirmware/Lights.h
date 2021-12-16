@@ -8,7 +8,7 @@
 #define CHARLIEPLEX_A   0
 #define CHARLIEPLEX_B   1
 #define CHARLIEPLEX_C   2
-#define starLight       4
+#define STAR_LIGHT      4
 
 // Class
 class Lights
@@ -33,6 +33,7 @@ class Lights
 
         // Functions
         void patternA();
+        void patternB();
         void reset();
 };
 
