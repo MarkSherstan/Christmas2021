@@ -25,7 +25,16 @@ class Lights
             {{OUTPUT, INPUT, OUTPUT}, {LOW, LOW, HIGH}}};
 
         // Functions
+        /////////////////
+        //      *      //
+        //    3   0    //
+        //   2     5   //
+        //  4       1  //
+        // ----------- //
+        //      ||     //
+        /////////////////
         void lightSelect(uint8_t LED);
+        void lightSelect2x(uint8_t A, uint8_t B, uint8_t msDelay = 10);
 
     public:
         // Config
