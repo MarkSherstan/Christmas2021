@@ -116,3 +116,25 @@ void Lights::patternC()
     // Reset lights
     reset();
 }
+
+
+// Pattern D: All lights on
+void Lights::patternD()
+{
+    // Turn on the star
+    digitalWrite(STAR_LIGHT, HIGH);
+
+    // Loop super fast to make lights all "on"
+    for (uint8_t i = 0; i < 250; i++)
+    {
+        // Loop through each LED
+        for (uint8_t j = 0; j < 6; j++)
+        {
+            lightSelect(j);
+            delay(2);
+        }
+    }
+
+    // Reset lights
+    reset();
+}

@@ -44,6 +44,7 @@ class Lights
         void patternA();
         void patternB();
         void patternC();
+        void patternD();
         void reset();
 };
 
