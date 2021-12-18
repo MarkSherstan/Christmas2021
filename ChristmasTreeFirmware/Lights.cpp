@@ -26,7 +26,7 @@ void Lights::lightSelect(uint8_t LED)
     digitalWrite(CHARLIEPLEX_C, stateMatrix[LED][1][2]);
 }
 
-// Select 2 LEDs to turn on
+// Select two LEDs to turn on
 void Lights::lightSelect2x(uint8_t A, uint8_t B, uint8_t msDelay)
 {
     lightSelect(A);
@@ -64,6 +64,7 @@ void Lights::patternA()
 // Pattern B: Flash up and Down
 void Lights::patternB()
 {
+    // Flash through the tree in groupings
     for (uint8_t i = 0; i < 15; i++)
     {
         for (uint8_t j = 0; j < 4; j++)
@@ -127,7 +128,6 @@ void Lights::patternD()
     // Loop super fast to make lights all "on"
     for (uint8_t i = 0; i < 250; i++)
     {
-        // Loop through each LED
         for (uint8_t j = 0; j < 6; j++)
         {
             lightSelect(j);
