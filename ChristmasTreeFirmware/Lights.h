@@ -43,6 +43,7 @@ class Lights
         // Functions
         void patternA();
         void patternB();
+        void patternC();
         void reset();
 };
 

@@ -89,3 +89,30 @@ void Lights::patternB()
     // Reset lights
     reset();
 }
+
+// Pattern C: Around the world
+void Lights::patternC()
+{
+    // Variables for nice loops
+    uint8_t magicDelay = 100;
+    uint8_t pins[7] = {4, 2, 3, STAR_LIGHT, 0, 5, 1};
+
+    // Go around the world
+    for (uint8_t i = 0; i < 10; i++)
+    {
+        for (uint8_t j = 0; j < sizeof(pins); j++) 
+        {
+            if (j == 3) {
+                digitalWrite(pins[j], HIGH);
+                delay(magicDelay);
+                digitalWrite(pins[j], LOW);
+            } else {
+                lightSelect(pins[j]);
+                delay(magicDelay);
+            }
+        }
+    }
+
+    // Reset lights
+    reset();
+}
