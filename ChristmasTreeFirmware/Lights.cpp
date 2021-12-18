@@ -14,15 +14,7 @@ void Lights::reset()
     digitalWrite(STAR_LIGHT, LOW);
 }
 
-// Select LED to turn on:
-    /////////////////
-    //      *      //
-    //    3   0    //
-    //   2     5   //
-    //  4       1  //
-    // ----------- //
-    //      ||     //
-    /////////////////
+// Select LED to turn on
 void Lights::lightSelect(uint8_t LED)
 {
     pinMode(CHARLIEPLEX_A, stateMatrix[LED][0][0]);
@@ -32,6 +24,16 @@ void Lights::lightSelect(uint8_t LED)
     digitalWrite(CHARLIEPLEX_A, stateMatrix[LED][1][0]);
     digitalWrite(CHARLIEPLEX_B, stateMatrix[LED][1][1]);
     digitalWrite(CHARLIEPLEX_C, stateMatrix[LED][1][2]);
+}
+
+// Select 2 LEDs to turn on
+void Lights::lightSelect2x(uint8_t A, uint8_t B, uint8_t msDelay)
+{
+    lightSelect(A);
+    delay(msDelay);
+    lightSelect(B);
+    delay(msDelay);
+    reset();
 }
 
 // Pattern A: Flash all the lights
@@ -62,37 +64,28 @@ void Lights::patternA()
 // Pattern B: Flash up and Down
 void Lights::patternB()
 {
-    for (uint8_t i = 0; i < 10; i++)
+    for (uint8_t i = 0; i < 15; i++)
     {
         for (uint8_t j = 0; j < 4; j++)
         {
-        lightSelect(1);
-        delay(10);
-        lightSelect(4);
-        delay(10);
+            lightSelect2x(1, 4);
         }
 
         for (uint8_t j = 0; j < 4; j++)
         {
-        lightSelect(2);
-        delay(10);
-        lightSelect(5);
-        delay(10);
+            lightSelect2x(2, 5);
         }
 
         for (uint8_t j = 0; j < 4; j++)
         {
-        lightSelect(3);
-        delay(10);
-        lightSelect(0);
-        delay(10);
+            lightSelect2x(0, 3);
         }
 
         digitalWrite(STAR_LIGHT, HIGH);
         delay(100);
         digitalWrite(STAR_LIGHT, LOW);
     }
-    
+
     // Reset lights
     reset();
 }
