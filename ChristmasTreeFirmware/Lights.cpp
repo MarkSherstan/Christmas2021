@@ -118,7 +118,6 @@ void Lights::patternC()
     reset();
 }
 
-
 // Pattern D: All lights on
 void Lights::patternD()
 {
@@ -136,5 +135,52 @@ void Lights::patternD()
     }
 
     // Reset lights
+    reset();
+}
+
+// Pattern E: Greens and red lightning
+void Lights::patternE()
+{
+    // Variables for nice loops
+    uint8_t magicDelay = 75;
+    uint8_t pins[7] = {1, 2, 0, 3, 5, 4};
+
+    // Turn on the star
+    digitalWrite(STAR_LIGHT, HIGH);
+
+    // Make a zig zag
+    for (uint8_t i = 0; i < 3; i++)
+    {
+        for (uint8_t ii = 0; ii < 3; ii++)
+        {
+            for (uint8_t iii = 0; iii < sizeof(pins); iii++) 
+            {
+                lightSelect(pins[iii]);
+                delay(magicDelay);
+            }
+        }
+
+        // Pulse only the star
+        reset();
+
+        for (uint8_t j = 255; j > 0; j--) 
+        {
+            analogWrite(STAR_LIGHT, j);
+            delay(2);
+        }
+
+        for (uint8_t k = 0; k < 255; k++) 
+        {
+            analogWrite(STAR_LIGHT, k);
+            delay(2);
+        }
+    }
+
+    // Reset lights
+    for (uint8_t j = 255; j > 0; j--) 
+    {
+        analogWrite(STAR_LIGHT, j);
+        delay(2);
+    }
     reset();
 }
