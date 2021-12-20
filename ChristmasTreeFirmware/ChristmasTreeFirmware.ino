@@ -40,7 +40,22 @@ void loop()
     
     case 1:
         lights.patternB();
-        state += 1; // possible race condition... Set to zero?
+        state += 1;
+        break;
+    
+    case 2:
+        lights.patternC();
+        state += 1;
+        break;
+    
+    case 3:
+        lights.patternD();
+        state += 1;
+        break;
+
+    case 4:
+        lights.patternE();
+        state = 0;
         break;
     
     default:
