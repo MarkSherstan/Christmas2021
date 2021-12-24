@@ -7,8 +7,9 @@ Hardware and firmware project for the 2021 holiday season.
 
 Other notes:
 * This item 100% contains lead
-* The batteries should last somewhere between three days and a year (multimeter was not accurate enough to get a real number but its been running for three days as of today)
+* The batteries should last somewhere between one week and a year or two (multimeter was not accurate enough to get a real number but its been running for at least a week)
 * The board is not conformal coated meaning all contacts are "live". Therefore, make sure the board does not make contact with any metal objects (this will cause magic smoke; not good)
+* Do your best to hold the PCB by the edges. This reduces the risk of static discharge which tends to put electrical components in the graveyard.
 
 # AS IS
 THE SOFTWARE AND HARDWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
