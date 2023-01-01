@@ -7,7 +7,7 @@ Hardware and firmware project for the 2021 holiday season
 
 Other notes:
 * This item 100% contains lead
-* The batteries should last somewhere between one week and a year or two (multimeter was not accurate enough to get a real number but its been running for at least a week)
+* The batteries should last somewhere between one week and a year or two (multimeter was not accurate enough to get a real number but its been running for at least a week - update: 1+ year battery life has been reported)
 * The board is not conformal coated meaning all contacts are "live". Therefore, make sure the board does not make contact with any metal objects (this will cause magic smoke; not good)
 * Do your best to hold the PCB by the edges. This reduces the risk of static discharge which tends to put electrical components in the graveyard
 
